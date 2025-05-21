@@ -1,30 +1,14 @@
-# earthquake-rf
+These four Python scripts implement different machine learning models for earthquake magnitude prediction using the same dataset (earthquake_1995-2023.csv). Each script follows a similar structure but employs a different algorithm:
 
-This Python script for earthquake magnitude prediction uses a Random Forest Regressor machine learning model. The script performs the following key operations:
+1. The Random Forest Regressor script (earthquake_rf.py) uses ensemble learning with multiple decision trees to predict earthquake magnitudes, optimizing parameters like n_estimators, max_depth, and min_samples_split.
 
-1. Imports necessary libraries, including pandas, numpy, scikit-learn components, and visualisation tools like matplotlib and seaborn.
+2. The Decision Tree Regressor script (eg_dt.py) implements a single decision tree model with hyperparameter tuning for max_depth, min_samples_split, min_samples_leaf, and max_features.
 
-2. Loads earthquake data from a CSV file covering 1995-2023, then preprocesses it by:
-   - Dropping 'title' and 'date_time' columns
-   - One-hot encoding categorical features
-   - Handling missing values
+3. The LightGBM script (eg_lbgm.py) utilizes gradient boosting with the LightGBM library, including special handling for column names to ensure compatibility with the algorithm.
 
-3. Splits the data into training and testing sets with an 80/20 ratio.
+4. The Support Vector Machine script (eg_svm.py) applies SVR with different kernels (linear, rbf, poly) and regression parameters.
 
-4. Applies feature scaling using StandardScaler.
+All scripts share common elements: they load and preprocess the earthquake data, perform one-hot encoding for categorical features, handle missing values, split data into training/testing sets, apply feature scaling, and conduct hyperparameter tuning via GridSearchCV. Each model's performance is evaluated using metrics like MSE, MAE, and R² score.
 
-5. Implements a Random Forest Regressor with hyperparameter tuning using GridSearchCV, exploring different combinations of estimators, max depth, and minimum samples for splitting.
-
-6. Evaluates the model using multiple metrics:
-   - Mean Squared Error (MSE)
-   - Mean Absolute Error (MAE)
-   - R² Score
-
-7. Creates several visualisations to analyse model performance:
-   - Actual vs. Predicted magnitude plot
-   - Residual analysis plots
-   - Feature importance visualisation
-   - Confusion matrix using binned magnitude values
-
-The code is structured to train a model that can predict earthquake magnitudes based on various features in the dataset.
+The scripts generate similar visualizations: actual vs. predicted plots, residual analysis, feature importance rankings (except for SVM), and binned confusion matrices to assess prediction accuracy across different magnitude ranges. Additionally, they include ROC curve analysis at various magnitude thresholds (4.0, 5.0, 6.0, 7.0) to evaluate each model's ability to classify earthquakes above specific magnitudes.
 
